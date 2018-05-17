@@ -4,7 +4,7 @@ App({
     var that = this;
     //  获取配置参数
     wx.request({
-      url: that.globalData.serviceUrl + '/shop/index-const',
+      url: that.globalData.serviceUrl + 'shop/index-const',
       data: {
         key: 'mallName'
       },
@@ -202,7 +202,7 @@ App({
   },
   globalData:{
     userInfo:null,
-    serviceUrl: "https://duyinghao.com/index.php?r=", 
+    serviceUrl: "https://www.duyinghao.com/index.php?r=", 
     version: "2.0",
     shareProfile: '百款精品商品，总有一款适合您' // 首页转发的时候话术
   }
