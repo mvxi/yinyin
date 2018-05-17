@@ -4,9 +4,9 @@ App({
     var that = this;
     //  获取配置参数
     wx.request({
-      url: that.globalData.serviceUrl + 'shop/index-const',
+      url: that.globalData.serviceUrl + 'config/index',
       data: {
-        key: 'mallName'
+        key: 'mallname'
       },
       success: function (res) {
         console.log(res);
