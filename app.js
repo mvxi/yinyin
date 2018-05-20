@@ -4,12 +4,11 @@ App({
     var that = this;
     //  获取配置参数
     wx.request({
-      url: that.globalData.serviceUrl + 'config/index',
+      url: that.globalData.serviceUrl + 'app/config',
       data: {
-        key: 'mallname'
       },
       success: function (res) {
-        console.log(res);
+        console.log('res:',res);
         if (res.data.errno == 0) {
           wx.setStorageSync('mallName', res.data.data.appname);
         }

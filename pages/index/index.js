@@ -16,12 +16,11 @@ Page({
     goods:[],
     scrollTop:"0",
     loadingMoreHidden:true,
-
     hasNoCoupons:true,
     coupons: [],
     searchInput: '',
+    banners: [{ product_id: 123, pic_url: 'https://img11.360buyimg.com/n1/s450x450_jfs/t3550/233/990924438/84482/f2485cb3/581a97d7N02c57c99.jpg' }, { product_id: 3456, pic_url: 'https://img10.360buyimg.com/imgzone/jfs/t18178/187/2475478680/95741/5c5b6175/5af8f51eNb09cac68.jpg' }, { product_id: 3456, pic_url: 'https://img10.360buyimg.com/imgzone/jfs/t18178/187/2475478680/95741/5c5b6175/5af8f51eNb09cac68.jpg' }],
   },
-
   tabClick: function (e) {
     this.setData({
       activeCategoryId: e.currentTarget.id
@@ -76,20 +75,21 @@ Page({
     })
     */
     wx.request({
-      url: app.globalData.serviceUrl + '/config/index',
+      url: app.globalData.serviceUrl + 'index/content',
       data: {
         key: 'mallName'
       },
       success: function(res) {
-        if (res.data.code == 404) {
+        if (res.data.errno == 404) {
           wx.showModal({
             title: '提示',
             content: '请在后台添加 banner 轮播图片',
             showCancel: false
           })
-        } else {
+        } else if (res.data.errno == 0) {
+          console.log('config/index res:', res.data.data)
           that.setData({
-            banners: res.data.data
+            banners: res.data.data,
           });
         }
       }
