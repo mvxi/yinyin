@@ -89,7 +89,7 @@ Page({
         } else if (res.data.errno == 0) {
           console.log('config/index res:', res.data.data)
           that.setData({
-            banners: res.data.data,
+            banners: res.data.data.banners,
           });
         }
       }
