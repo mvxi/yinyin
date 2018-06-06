@@ -34,13 +34,15 @@ Page({
     })  
   },
   onLoad: function (e) {
+    console.log("good_detials e:",e.id);
+    var that = this;
+/*
     if (e.inviter_id) {
       wx.setStorage({
         key: 'inviter_id_' + e.id,
         data: e.inviter_id
       })
     }
-    var that = this;
     // 获取购物车数据
     wx.getStorage({
       key: 'shopCarInfo',
@@ -51,10 +53,11 @@ Page({
         });
       } 
     })
+    */
     wx.request({
-      url: 'https://api.it120.cc/'+ app.globalData.subDomain +'/shop/goods/detail',
+      url: app.globalData.serviceUrl +'product/detail',
       data: {
-        id: e.id
+        product_id: e.id
       },
       success: function(res) {
         var selectSizeTemp = "";

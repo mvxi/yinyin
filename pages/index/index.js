@@ -12,6 +12,7 @@ Page({
     swiperCurrent: 0,  
     selectCurrent:0,
     categories: [],
+    productTypes: [],
     activeCategoryId: 0,
     goods:[],
     scrollTop:"0",
@@ -41,6 +42,7 @@ Page({
   },
   tapBanner: function(e) {
     if (e.currentTarget.dataset.id != 0) {
+      console.log('aaaaaaaaaaaaa', e);
       wx.navigateTo({
         url: "/pages/goods-details/index?id=" + e.currentTarget.dataset.id
       })
@@ -80,19 +82,20 @@ Page({
         key: 'mallName'
       },
       success: function(res) {
-        if (res.data.errno == 404) {
-          wx.showModal({
-            title: '提示',
-            content: '请在后台添加 banner 轮播图片',
-            showCancel: false
-          })
-        } else if (res.data.errno == 0) {
+        if (res.data.errno == 0) {
           console.log('config/index res:', res.data.data)
           that.setData({
             banners: res.data.data.banners,
+            productTypes: res.data.data.product_types,
           });
+        } else {
+          wx.showModal({
+            title: '错误',
+            content: '网络发生异常',
+            showCancel: false
+          })
         }
-      }
+      } 
     })
     wx.request({
       url: 'https://api.it120.cc/'+ app.globalData.subDomain +'/shop/goods/category/all',
