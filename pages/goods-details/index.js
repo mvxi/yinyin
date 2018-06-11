@@ -60,6 +60,19 @@ Page({
         product_id: e.id
       },
       success: function(res) {
+        if (res.data.errno == 0) {
+          console.log('detail res:', res);
+          that.setData({
+            goodsDetail: res.data.data.detail,
+          });
+        } else {
+          wx.showModal({
+            title: '错误',
+            content: '网络发生异常',
+            showCancel: false
+          })
+        }
+        /*
         var selectSizeTemp = "";
         if (res.data.data.properties) {
           for(var i=0;i<res.data.data.properties.length;i++){
@@ -82,6 +95,7 @@ Page({
           buyNumber:(res.data.data.basicInfo.stores>0) ? 1: 0
         });
         WxParse.wxParse('article', 'html', res.data.data.content, that, 5);
+        */
       }
     })
     this.reputation(e.id);

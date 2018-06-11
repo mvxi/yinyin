@@ -8,7 +8,7 @@ App({
       data: {
       },
       success: function (res) {
-        console.log('res:',res);
+        console.log('app res:',res);
         if (res.data.errno == 0) {
           wx.setStorageSync('mallName', res.data.data.appname);
         }
