@@ -94,8 +94,8 @@ Page({
           buyNumMax:res.data.data.basicInfo.stores,
           buyNumber:(res.data.data.basicInfo.stores>0) ? 1: 0
         });
-        WxParse.wxParse('article', 'html', res.data.data.content, that, 5);
         */
+        WxParse.wxParse('article', 'html', res.data.data.detail.introduction, that, 5);
       }
     })
     this.reputation(e.id);

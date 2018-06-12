@@ -37,7 +37,7 @@
    <view wx:if="{{hasMoreSelect}}" class="row-arrow" bindtap="bindGuiGeTap">
       {{selectSize}}
    </view>
-   <!--> test code
+   <!-- 
    <view wx:if="true" class="row-arrow" bindtap="goKanjia">
       邀请好友帮忙砍价 ( <text style='color:red'>底价 20 元</text> )
    </view>
