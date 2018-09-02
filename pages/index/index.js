@@ -23,6 +23,7 @@ Page({
     banners: [{ product_id: 123, pic_url: 'https://img11.360buyimg.com/n1/s450x450_jfs/t3550/233/990924438/84482/f2485cb3/581a97d7N02c57c99.jpg' }, { product_id: 3456, pic_url: 'https://img10.360buyimg.com/imgzone/jfs/t18178/187/2475478680/95741/5c5b6175/5af8f51eNb09cac68.jpg' }, { product_id: 3456, pic_url: 'https://img10.360buyimg.com/imgzone/jfs/t18178/187/2475478680/95741/5c5b6175/5af8f51eNb09cac68.jpg' }],
   },
   tabClick: function (e) {
+    console.log('current tab:',e);
     this.setData({
       activeCategoryId: e.currentTarget.id
     });
@@ -116,25 +117,25 @@ Page({
     that.getCoupons ();
     that.getNotice ();
   },
-  getGoodsList: function (categoryId) {
-    if (categoryId == 0) {
-      categoryId = "";
-    }
-    console.log(categoryId)
+  getGoodsList: function (productType) {
+    console.log('current product_type:', productType);
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/'+ app.globalData.subDomain +'/shop/goods/list',
+      url: app.globalData.serviceUrl + 'product/list',
       data: {
-        categoryId: categoryId,
-        nameLike: that.data.searchInput
+        product_type: productType,
+        offset: 0,
+        limit: 10
+        //nameLike: that.data.searchInput
       },
       success: function(res) {
         that.setData({
           goods:[],
           loadingMoreHidden:true
         });
+        console.log('current product_list:', res);
         var goods = [];
-        if (res.data.code != 0 || res.data.data.length == 0) {
+        if (res.data.errno != 0 || res.data.data.length == 0) {
           that.setData({
             loadingMoreHidden:false,
           });

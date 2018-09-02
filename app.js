@@ -86,12 +86,12 @@ App({
             code: res.code
           },
           success: function(res) {
-            if (res.data.code == 10000) {
+            if (res.data.errno == 10000) {
               // 去注册
               that.registerUser();
               return;
             }
-            if (res.data.code != 0) {
+            if (res.data.errno != 0) {
               // 登录错误
               wx.hideLoading();
               wx.showModal({
@@ -102,8 +102,8 @@ App({
               return;
             }
             //console.log(res.data.data)
-            that.globalData.token = res.data.data.token;
-            that.globalData.uid = res.data.data.uid;
+            //that.globalData.token = res.data.data.token;
+            that.globalData.openid = res.data.data.openid;
           }
         })
       }
@@ -203,8 +203,8 @@ App({
     userInfo:null,
     serviceUrl: "https://www.duyinghao.com/index.php?r=", 
     version: "2.0",
-    shareProfile: '百款精品商品，总有一款适合您' // 首页转发的时候话术
-    openid:null,
+    shareProfile: '百款精品商品，总有一款适合您',// 首页转发的时候话术
+    openid:null
   }
   /*
   根据自己需要修改下单时候的模板消息内容设置，可增加关闭订单、收货时候模板消息提醒；
