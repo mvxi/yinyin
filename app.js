@@ -14,7 +14,8 @@ App({
         }
       }
     })
-    //  获取商城名称
+    // 获取商城名称
+    /*
     wx.request({
       url: 'https://api.it120.cc/'+ that.globalData.subDomain +'/config/get-value',
       data: {
@@ -58,6 +59,8 @@ App({
         }
       }
     })
+        */
+
     this.login();
   },
   login : function () {
@@ -80,10 +83,12 @@ App({
     }
     wx.login({
       success: function (res) {
+        var yuid = wx.getStorageSync('yuid');
         wx.request({
           url: that.globalData.serviceUrl + 'app/login',
           data: {
-            code: res.code
+            code: res.code,
+            yuid: yuid
           },
           success: function(res) {
             if (res.data.errno == 10000) {
@@ -103,7 +108,8 @@ App({
             }
             //console.log(res.data.data)
             //that.globalData.token = res.data.data.token;
-            that.globalData.openid = res.data.data.openid;
+            that.globalData.yuid = res.data.data.yuid;
+            wx.setStorageSync('yuid', res.data.data.yuid);
           }
         })
       }
@@ -132,6 +138,7 @@ App({
       }
     })
   },
+    /*
   sendTempleMsg: function (orderId, trigger, template_id, form_id, page, postJsonString){
     var that = this;
     wx.request({
@@ -180,6 +187,7 @@ App({
       }
     })
   },
+  */
   getUserInfo: function (cb) {
     var that = this
     if (this.globalData.userInfo) {
@@ -204,7 +212,7 @@ App({
     serviceUrl: "https://www.duyinghao.com/index.php?r=", 
     version: "2.0",
     shareProfile: '百款精品商品，总有一款适合您',// 首页转发的时候话术
-    openid:null
+    yuid:null
   }
   /*
   根据自己需要修改下单时候的模板消息内容设置，可增加关闭订单、收货时候模板消息提醒；
