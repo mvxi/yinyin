@@ -64,6 +64,8 @@ Page({
           console.log('detail res:', res);
           that.setData({
             goodsDetail: res.data.data.detail,
+            buyNumMax: res.data.data.detail.stock_count,
+            buyNumber: (res.data.data.detail.stock_count > 0) ? 1 : 0
           });
         } else {
           wx.showModal({
@@ -321,6 +323,7 @@ Page({
   /**
    * 组建购物车信息
    */
+  /* 老代码
   bulidShopCarInfo: function () {
     // 加入购物车
     var shopCarMap = {};
@@ -363,6 +366,46 @@ Page({
     }
     return shopCarInfo;
   },
+  */
+  // 新代码
+  bulidShopCarInfo: function () {
+    // 加入购物车
+    var shopCarMap = {};
+    shopCarMap.id = this.data.goodsDetail.id;
+    shopCarMap.name = this.data.goodsDetail.name;
+    shopCarMap.sellPrice = this.data.goodsDetail.sell_price;
+    shopCarMap.introduction = this.data.goodsDetail.introduction;
+    shopCarMap.productId = this.data.goodsDetail.product_id;
+    shopCarMap.productType = this.data.goodsDetail.product_type;
+    shopCarMap.number = this.data.buyNumber;
+
+    var shopCarInfo = this.data.shopCarInfo;
+    if (!shopCarInfo.shopNum) {
+      shopCarInfo.shopNum = 0;
+    }
+    if (!shopCarInfo.shopList) {
+      shopCarInfo.shopList = [];
+    }
+
+    var hasSameGoodsIndex = -1;
+    for (var i = 0; i < shopCarInfo.shopList.length; i++) {
+      var tmpShopCarMap = shopCarInfo.shopList[i];
+      if (tmpShopCarMap.productId == shopCarMap.productId) {
+        hasSameGoodsIndex = i;
+        shopCarMap.number = shopCarMap.number + tmpShopCarMap.number;
+        break;
+      }
+    }
+
+    shopCarInfo.shopNum = shopCarInfo.shopNum + this.data.buyNumber;
+    if (hasSameGoodsIndex > -1) {
+      shopCarInfo.shopList.splice(hasSameGoodsIndex, 1, shopCarMap);
+    } else {
+      shopCarInfo.shopList.push(shopCarMap);
+    }
+    return shopCarInfo;
+  },
+
 	/**
 	 * 组建立即购买信息
 	 */

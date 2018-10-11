@@ -81,11 +81,11 @@
         <view class="popup-contents">
              <view class="pop-goods-info">
                 <view class="pop-img-box">
-                    <image src="{{goodsDetail.basicInfo.pic}}" class="goods-thumbnail"/>
+                    <image src="{{goodsDetail.cover_pic}}" class="goods-thumbnail"/>
                 </view>
                 <view class="pop-goods-des">
-                    <view class="pop-goods-title">{{goodsDetail.basicInfo.name}}</view>
-                    <view class="pop-goods-price">¥ {{selectSizePrice}}</view>
+                    <view class="pop-goods-title">{{goodsDetail.name}}</view>
+                    <view class="pop-goods-price">¥ {{goodsDetail.sell_price}}</view>
                 </view>
                 <view class="pop-goods-close" bindtap="closePopupTap"></view>
              </view>
