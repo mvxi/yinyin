@@ -119,7 +119,7 @@ Page({
       for(var i = 0 ; i < list.length ; i++){
           var curItem = list[i];
           if(curItem.active){
-            total+= parseFloat(curItem.price)*curItem.number;
+            total+= parseFloat(curItem.sellPrice)*curItem.number;
           }
       }
       total = parseFloat(total.toFixed(2));//js浮点计算bug，取两位小数精度

@@ -374,10 +374,12 @@ Page({
     shopCarMap.id = this.data.goodsDetail.id;
     shopCarMap.name = this.data.goodsDetail.name;
     shopCarMap.sellPrice = this.data.goodsDetail.sell_price;
+    shopCarMap.coverPic = this.data.goodsDetail.cover_pic;
     shopCarMap.introduction = this.data.goodsDetail.introduction;
     shopCarMap.productId = this.data.goodsDetail.product_id;
     shopCarMap.productType = this.data.goodsDetail.product_type;
     shopCarMap.number = this.data.buyNumber;
+    shopCarMap.active = true;
 
     var shopCarInfo = this.data.shopCarInfo;
     if (!shopCarInfo.shopNum) {
@@ -409,6 +411,7 @@ Page({
 	/**
 	 * 组建立即购买信息
 	 */
+  /*老代码 
   buliduBuyNowInfo: function () {
     var shopCarMap = {};
     shopCarMap.goodsId = this.data.goodsDetail.basicInfo.id;
@@ -432,22 +435,29 @@ Page({
     if (!buyNowInfo.shopList) {
       buyNowInfo.shopList = [];
     }
-    /*    var hasSameGoodsIndex = -1;
-        for (var i = 0; i < toBuyInfo.shopList.length; i++) {
-          var tmpShopCarMap = toBuyInfo.shopList[i];
-          if (tmpShopCarMap.goodsId == shopCarMap.goodsId && tmpShopCarMap.propertyChildIds == shopCarMap.propertyChildIds) {
-            hasSameGoodsIndex = i;
-            shopCarMap.number = shopCarMap.number + tmpShopCarMap.number;
-            break;
-          }
-        }
-        toBuyInfo.shopNum = toBuyInfo.shopNum + this.data.buyNumber;
-        if (hasSameGoodsIndex > -1) {
-          toBuyInfo.shopList.splice(hasSameGoodsIndex, 1, shopCarMap);
-        } else {
-          toBuyInfo.shopList.push(shopCarMap);
-        }*/
+    buyNowInfo.shopList.push(shopCarMap);
+    return buyNowInfo;
+  },
+  */
+  buliduBuyNowInfo: function () {
+    var shopCarMap = {};
+    shopCarMap.id = this.data.goodsDetail.id;
+    shopCarMap.name = this.data.goodsDetail.name;
+    shopCarMap.sellPrice = this.data.goodsDetail.sell_price;
+    shopCarMap.introduction = this.data.goodsDetail.introduction;
+    shopCarMap.productId = this.data.goodsDetail.product_id;
+    shopCarMap.productType = this.data.goodsDetail.product_type;
+    shopCarMap.coverPic = this.data.goodsDetail.cover_pic;
+    shopCarMap.number = this.data.buyNumber;
+    shopCarMap.active = true;
 
+    var buyNowInfo = {};
+    if (!buyNowInfo.shopNum) {
+      buyNowInfo.shopNum = 0;
+    }
+    if (!buyNowInfo.shopList) {
+      buyNowInfo.shopList = [];
+    }
     buyNowInfo.shopList.push(shopCarMap);
     return buyNowInfo;
   },   
