@@ -86,10 +86,10 @@ Page({
       apiAddid = 0;
     }
     wx.request({
-      url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/shipping-address/' + apiAddoRuPDATE,
+      url: app.globalData.serviceUrl +'user/address-' + apiAddoRuPDATE,
       data: {
-        token: app.globalData.token,
-        id: apiAddid,
+        yuid: app.globalData.yuid,
+        addressId: apiAddid,
         provinceId: commonCityData.cityData[this.data.selProvinceIndex].id,
         cityId: cityId,
         districtId: districtId,
