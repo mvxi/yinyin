@@ -2,7 +2,8 @@
 	<view class="userinfo">
 		<image wx:if="{{userInfo && userInfo.avatarUrl}}" class="userinfo-avatar" src="{{ userInfo.avatarUrl }}" background-size="cover"></image>
 		<text class="userinfo-nickname">{{ userInfo.nickName }}</text>
-	</view>
+	  <button  wx:if="{{!userInfo}}" class="login-btn" type="warn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">登录</button>
+  </view>
   <view style="height:20rpx;background: #eee;width:100%;"></view>
   <view class="my-item" style='background:none;display:flex;flex-direction:column;height:auto;'>
     <view>
