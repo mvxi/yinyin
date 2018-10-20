@@ -17,11 +17,13 @@ Page({
     wx.setNavigationBarTitle({
       title: wx.getStorageSync('mallName')
     })
+    /*
     app.getUserInfo(function(userInfo){
       that.setData({
         userInfo: userInfo
       })
     })
+    */
   },
   onShow:function(){
 
