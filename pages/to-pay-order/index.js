@@ -162,12 +162,12 @@ Page({
   initShippingAddress: function () {
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/'+ app.globalData.subDomain +'/user/shipping-address/default',
+      url: app.globalData.serviceUrl +'user/address-get-default',
       data: {
-        token:app.globalData.token
+        yuid:app.globalData.yuid
       },
       success: (res) =>{
-        if (res.data.code == 0) {
+        if (res.data.errno == 0) {
           that.setData({
             curAddressData:res.data.data
           });
@@ -176,7 +176,7 @@ Page({
             curAddressData: null
           });
         }
-        that.processYunfei();
+        //that.processYunfei();
       }
     })
   },

@@ -79,7 +79,7 @@ Page({
       return
     }
     var apiAddoRuPDATE = "add";
-    var apiAddid = that.data.id;
+    var apiAddid = that.data.addressId;
     if (apiAddid) {
       apiAddoRuPDATE = "update";
     } else {
@@ -100,12 +100,12 @@ Page({
         isDefault:'true'
       },
       success: function(res) {
-        if (res.data.code != 0) {
+        if (res.data.errno != 0) {
           // 登录错误 
           wx.hideLoading();
           wx.showModal({
             title: '失败',
-            content: res.data.msg,
+            content: res.data.errmsg,
             showCancel:false
           })
           return;

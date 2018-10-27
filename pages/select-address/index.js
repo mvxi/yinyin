@@ -29,7 +29,7 @@ Page({
   
   editAddess: function (e) {
     wx.navigateTo({
-      url: "/pages/address-add/index?id=" + e.currentTarget.dataset.id
+      url: "/pages/address-add/index?id=" + e.currentTarget.dataset.addressId
     })
   },
   
@@ -44,16 +44,16 @@ Page({
   initShippingAddress: function () {
     var that = this;
     wx.request({
-      url: 'https://api.it120.cc/'+ app.globalData.subDomain +'/user/shipping-address/list',
+      url: app.globalData.serviceUrl + 'user/address-get-list',
       data: {
-        token:app.globalData.token
+        yuid:app.globalData.yuid
       },
       success: (res) =>{
-        if (res.data.code == 0) {
+        if (res.data.errno == 0) {
           that.setData({
             addressList:res.data.data
           });
-        } else if (res.data.code == 700){
+        } else if (res.data.errno != 0){
           that.setData({
             addressList: null
           });
