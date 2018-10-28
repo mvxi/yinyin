@@ -43,6 +43,8 @@ Page({
         data: e.inviter_id
       })
     }
+        */
+
     // 获取购物车数据
     wx.getStorage({
       key: 'shopCarInfo',
@@ -53,7 +55,6 @@ Page({
         });
       } 
     })
-    */
     wx.request({
       url: app.globalData.serviceUrl +'product/detail',
       data: {
