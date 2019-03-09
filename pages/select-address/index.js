@@ -29,12 +29,12 @@ Page({
   
   editAddess: function (e) {
     wx.navigateTo({
-      url: "/pages/address-add/index?id=" + e.currentTarget.dataset.addressId
+      url: "/pages/address-add/index?id=" + e.currentTarget.dataset.id
     })
   },
   
   onLoad: function () {
-    console.log('onLoad')
+    //console.log('onLoad')
 
    
   },
