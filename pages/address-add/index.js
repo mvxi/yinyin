@@ -195,7 +195,7 @@ Page({
           if (res.data.errno == 0) {
             var addressInfoStr = that.setDBSaveAddressId(res.data.data[0]);
             that.setData({
-              id:addressId,
+              addressId:addressId,
               addressData: res.data.data[0],
               selProvince: addressInfoStr['provinceName'],
               selCity: addressInfoStr['cityName'],
@@ -217,7 +217,6 @@ Page({
     var retSelIdx = 0;
     var addressInfo = {};
     addressInfo['provinceName'] = addressInfo['cityName'] = addressInfo['districtName'] = '';
-    console.log('22222222222222',data);
     for (var i = 0; i < commonCityData.cityData.length; i++) {
       if (data.provinceId == commonCityData.cityData[i].id) {
         this.data.selProvinceIndex = i;
@@ -243,17 +242,18 @@ Page({
   },
   deleteAddress: function (e) {
     var that = this;
-    var id = e.currentTarget.dataset.id;
+    var addressId = e.currentTarget.dataset.id;
+    console.log('aaaaaaaaaaaaaaaa',e);
     wx.showModal({
       title: '提示',
       content: '确定要删除该收货地址吗？',
       success: function (res) {
         if (res.confirm) {
           wx.request({
-            url: 'https://api.it120.cc/' + app.globalData.subDomain + '/user/shipping-address/delete',
+            url: app.globalData.serviceUrl + 'user/address-del',
             data: {
-              token: app.globalData.token,
-              id: id
+              yuid: app.globalData.yuid,
+              addressId: addressId
             },
             success: (res) => {
               wx.navigateBack({})
