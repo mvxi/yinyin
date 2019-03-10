@@ -85,3 +85,15 @@ picker {
 .hui{
     color: #777;
 }
+
+
+.radio-group {
+    border-bottom: 10px solid #ddd;
+    display: flex;
+    align-items: center;
+}
+.radio {
+    display: block;
+    padding: 5px;
+    margin-left: 40rpx;
+}

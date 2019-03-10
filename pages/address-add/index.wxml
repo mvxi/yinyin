@@ -44,6 +44,16 @@
                 <input name="code" class="input" type="text" value="{{addressData.code}}{{wxaddress.postalCode}}"/>
             </view>
         </view>
+        <view class="row-wrap">
+            <view class="label">是否默认地址</view>
+            <view class="label-right">
+                <radio-group class="radio-group" bindchange="radioChange">
+                    <radio class="radio" wx:for-items="{{defaultItems}}" wx:key="name" value="{{item.value}}" checked="{{item.checked}}">
+                        <text>{{item.label}}</text>
+                    </radio>
+                </radio-group>            
+            </view>
+        </view>
     </view>
     <button type="warn" class="save-btn" formType="submit">保存</button>
     <button wx:if="{{!addressData}}" type="primary" class="save-btn" bindtap="readFromWx">从微信读取</button>

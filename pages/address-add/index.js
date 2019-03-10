@@ -11,7 +11,8 @@ Page({
     selDistrict:'请选择',
     selProvinceIndex:0,
     selCityIndex:0,
-    selDistrictIndex:0
+    selDistrictIndex:0,
+    isDefault: 0
   },
   bindCancel:function () {
     wx.navigateBack({})
@@ -22,7 +23,6 @@ Page({
     var address = e.detail.value.address;
     var mobile = e.detail.value.mobile;
     var code = e.detail.value.code;
-
     if (linkMan == ""){
       wx.showModal({
         title: '提示',
@@ -97,7 +97,7 @@ Page({
         address:address,
         mobile:mobile,
         code:code,
-        isDefault:'true'
+        isDefault: this.data.isDefault
       },
       success: function(res) {
         if (res.data.errno != 0) {
@@ -176,6 +176,11 @@ Page({
       })
     }
   },
+  radioChange: function (event) {
+     this.setData({
+       isDefault: event.detail.value,
+    })
+  },
   onLoad: function (e) {
     var that = this;
     this.initCityData(1);
@@ -194,12 +199,31 @@ Page({
           wx.hideLoading();
           if (res.data.errno == 0) {
             var addressInfoStr = that.setDBSaveAddressId(res.data.data[0]);
+
+            var defaultItems = {};
+            defaultItems[0] = { 
+              'value': 1,
+              'label': '是',
+              'checked': 0
+            }
+            defaultItems[1] = {
+              'value': 0,
+              'label': '否',
+              'checked': 0
+            }
+            if (res.data.data[0].isDefault == 1) {
+              defaultItems[0].checked = 1;
+            } else {
+              defaultItems[1].checked = 1;
+            }
+
             that.setData({
               addressId:addressId,
               addressData: res.data.data[0],
               selProvince: addressInfoStr['provinceName'],
               selCity: addressInfoStr['cityName'],
-              selDistrict: addressInfoStr['districtName']
+              selDistrict: addressInfoStr['districtName'],
+              defaultItems: defaultItems
               });
             return;
           } else {
@@ -243,7 +267,6 @@ Page({
   deleteAddress: function (e) {
     var that = this;
     var addressId = e.currentTarget.dataset.id;
-    console.log('aaaaaaaaaaaaaaaa',e);
     wx.showModal({
       title: '提示',
       content: '确定要删除该收货地址吗？',
