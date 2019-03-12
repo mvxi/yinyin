@@ -75,6 +75,7 @@ Page({
       goodsJsonStr: that.data.goodsJsonStr,
       remark: remark
     };
+    console.log('createorder  postda:',postData);
     if (that.data.isNeedLogistics > 0) {
       if (!that.data.curAddressData) {
         wx.hideLoading();
@@ -91,7 +92,7 @@ Page({
         postData.districtId = that.data.curAddressData.districtId;
       }
       postData.address = that.data.curAddressData.address;
-      postData.linkMan = that.data.curAddressData.linkMan;
+      postData.linkMan = that.data.curAddressData.cp;
       postData.mobile = that.data.curAddressData.mobile;
       postData.code = that.data.curAddressData.code;
     }
@@ -193,7 +194,6 @@ Page({
         isNeedLogistics = 1;
       }
       allGoodsPrice += carShopBean.sellPrice * carShopBean.number;
-      console.log('rrrrrrrrrr000:', allGoodsPrice);
 
       var goodsJsonStrTmp = '';
       if (i > 0) {
@@ -208,13 +208,14 @@ Page({
       }
 
 
-      goodsJsonStrTmp += '{"goodsId":' + carShopBean.goodsId + ',"number":' + carShopBean.number + ',"propertyChildIds":"' + carShopBean.propertyChildIds + '","logisticsType":0, "inviter_id":' + inviter_id +'}';
+      goodsJsonStrTmp += '{"goodsId":' + carShopBean.productId + ',"number":' + carShopBean.number + 
+      //',"propertyChildIds":"' + carShopBean.propertyChildIds + '","logisticsType":0, "inviter_id":' + inviter_id +
+      '}';
       goodsJsonStr += goodsJsonStrTmp;
 
 
     }
     goodsJsonStr += "]";
-    console.log('rrrrrrrrrr:', allGoodsPrice);
     that.setData({
       isNeedLogistics: isNeedLogistics,
       goodsJsonStr: goodsJsonStr,
