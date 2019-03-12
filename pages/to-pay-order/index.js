@@ -64,14 +64,14 @@ Page({
   createOrder:function (e) {
     wx.showLoading();
     var that = this;
-    var loginToken = app.globalData.token // 用户登录 token
+    var yuid = app.globalData.yuid; // 用户登录 token 
     var remark = ""; // 备注信息
     if (e) {
       remark = e.detail.value.remark; // 备注信息
     }
 
     var postData = {
-      token: loginToken,
+      yuid: yuid,
       goodsJsonStr: that.data.goodsJsonStr,
       remark: remark
     };
@@ -104,7 +104,7 @@ Page({
 
 
     wx.request({
-      url: 'https://api.it120.cc/'+ app.globalData.subDomain +'/order/create',
+      url: app.globalData.serviceUrl + 'order/create',
       method:'POST',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -176,7 +176,7 @@ Page({
             curAddressData: null
           });
         }
-        //that.processYunfei();
+        that.processYunfei();
       }
     })
   },
@@ -192,7 +192,8 @@ Page({
       if (carShopBean.logistics) {
         isNeedLogistics = 1;
       }
-      allGoodsPrice += carShopBean.price * carShopBean.number;
+      allGoodsPrice += carShopBean.sellPrice * carShopBean.number;
+      console.log('rrrrrrrrrr000:', allGoodsPrice);
 
       var goodsJsonStrTmp = '';
       if (i > 0) {
@@ -213,10 +214,11 @@ Page({
 
     }
     goodsJsonStr += "]";
-    //console.log(goodsJsonStr);
+    console.log('rrrrrrrrrr:', allGoodsPrice);
     that.setData({
       isNeedLogistics: isNeedLogistics,
-      goodsJsonStr: goodsJsonStr
+      goodsJsonStr: goodsJsonStr,
+      allGoodsAndYunPrice: allGoodsPrice
     });
     //that.createOrder();
   },
