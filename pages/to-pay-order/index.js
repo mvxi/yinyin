@@ -208,7 +208,7 @@ Page({
       }
 
 
-      goodsJsonStrTmp += '{"goodsId":' + carShopBean.productId + ',"number":' + carShopBean.number + 
+      goodsJsonStrTmp += '{"productId":' + carShopBean.productId + ',"number":' + carShopBean.number + 
       //',"propertyChildIds":"' + carShopBean.propertyChildIds + '","logisticsType":0, "inviter_id":' + inviter_id +
       '}';
       goodsJsonStr += goodsJsonStrTmp;
