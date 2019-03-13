@@ -72,7 +72,7 @@ Page({
 
     var postData = {
       yuid: yuid,
-      goodsJsonStr: that.data.goodsJsonStr,
+      productsInfo: that.data.goodsJsonStr,
       remark: remark
     };
     console.log('createorder  postda:',postData);
